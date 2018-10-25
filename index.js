@@ -1,4 +1,4 @@
-const { msg, fmt } = require('./utils');
+const { msg, fmt } = require('./lib');
 
 module.exports = function(val) {
   if (!val) {
