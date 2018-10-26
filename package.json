@@ -1,11 +1,11 @@
 {
   "name": "timefmt",
   "description": "A tiny command line utility for time conversion",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pddstudio/timefmt.git"  
+    "url": "https://github.com/pddstudio/timefmt.git"
   },
   "author": {
     "name": "Patrick Jung",
@@ -16,7 +16,11 @@
     "url": "https://github.com/pddstudio/timefmt/issues"
   },
   "keywords": [
-    "time", "conversion", "cli", "format", "time-formatting"
+    "time",
+    "conversion",
+    "cli",
+    "format",
+    "time-formatting"
   ],
   "main": "index.js",
   "bin": {
