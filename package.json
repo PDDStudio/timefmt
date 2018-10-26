@@ -1,11 +1,27 @@
 {
   "name": "timefmt",
+  "description": "A tiny command line utility for time conversion",
   "version": "1.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pddstudio/timefmt.git"  
+  },
+  "author": {
+    "name": "Patrick Jung",
+    "email": "patrick.pddstudio@gmail.com"
+  },
+  "homepage": "https://github.com/pddstudio/timefmt#readme",
+  "bugs": {
+    "url": "https://github.com/pddstudio/timefmt/issues"
+  },
+  "keywords": [
+    "time", "conversion", "cli", "format", "time-formatting"
+  ],
   "main": "index.js",
   "bin": {
     "timefmt": "bin/timefmt.js"
   },
-  "license": "MIT",
   "scripts": {
     "precommit": "lint-staged",
     "lint": "eslint lib/* bin/*",
