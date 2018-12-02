@@ -1,0 +1,18 @@
+{
+  "non-interactive": true,
+  "dry-run": true,
+  "requireCleanWorkingDir": false,
+  "src": {
+    "tagName": "v${version}"
+  },
+  "dist": {
+    "github": {
+      "release": true,
+      "tokenRef": "RELEASE_IT_GH_TOKEN",
+      "assets": [ "./*" ]
+    },
+    "npm": {
+      "publish": false
+    }
+  }
+}
