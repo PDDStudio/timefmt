@@ -26,10 +26,18 @@
   "bin": {
     "timefmt": "bin/timefmt.js"
   },
+  "pkg": {
+    "targets": [
+      "node10-win-x64",
+      "node10-linux-x64",
+      "node10-macos-x64"
+    ]
+  },
   "scripts": {
     "precommit": "lint-staged",
     "lint": "eslint lib/* bin/*",
-    "test": "mocha test.js"
+    "test": "mocha test.js",
+    "package": "pkg . --out-path dist"
   },
   "lint-staged": {
     "*.js": [
