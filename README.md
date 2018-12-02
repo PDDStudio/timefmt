@@ -1,10 +1,14 @@
-# `timefmt`
+# :clock4: `timefmt`
 
 > A tiny time converting util for the command line.
 
-## Installation
+## :package: Installation
 
-Install `timefmt` via `npm` or `yarn`:
+You can choose one of the following ways to install `timefmt`
+
+### :beginner: Install via your favorite Node Package Manager
+
+You can use `npm` or `yarn` (or any other package manager of your choice) to install this utility.
 
 ```sh
 # when using npm
@@ -13,7 +17,18 @@ npm i -g timefmt
 yarn global add timefmt
 ```
 
-## Usage
+### :beers: Install via Homebrew (MacOS)
+
+If you've [Homebrew](https://brew.sh) installed, simply run:
+
+```sh
+# tap the timefmt formula
+brew tap pddstudio/timefmt
+# Install timefmt using brew
+brew install timefmt
+```
+
+## :question: Usage
 
 _See `timefmt --help` for usage instructions._
 
@@ -24,6 +39,6 @@ timefmt --ms 1m 30s
 # => The given input time 1m 30s equals: 90000 ms
 ```
 
-## License
+## :star: License
 
 MIT License - See [LICENSE](./LICENSE) for details.
