@@ -40,7 +40,7 @@
     "package": "pkg . --out-path dist",
     "precommit": "lint-staged",
     "prerelease": "yarn clean && yarn build",
-    "release": "release-it",
+    "release": "source .env && release-it",
     "test": "mocha test.js"
   },
   "lint-staged": {
