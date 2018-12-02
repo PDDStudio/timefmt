@@ -34,10 +34,14 @@
     ]
   },
   "scripts": {
-    "precommit": "lint-staged",
+    "build": "./scripts/build-executables.js",
+    "clean": "rimraf dist",
     "lint": "eslint lib/* bin/*",
-    "test": "mocha test.js",
-    "package": "pkg . --out-path dist"
+    "package": "pkg . --out-path dist",
+    "precommit": "lint-staged",
+    "prerelease": "yarn clean && yarn build",
+    "release": "release-it",
+    "test": "mocha test.js"
   },
   "lint-staged": {
     "*.js": [
@@ -57,6 +61,9 @@
     "husky": "^1.1.2",
     "lint-staged": "^7.3.0",
     "mocha": "^5.2.0",
-    "pkg": "^4.3.5"
+    "pkg": "^4.3.5",
+    "release-it": "^8.2.0",
+    "rimraf": "^2.6.2",
+    "shelljs": "^0.8.3"
   }
 }
