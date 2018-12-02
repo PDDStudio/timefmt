@@ -1,6 +1,5 @@
 {
   "non-interactive": true,
-  "dry-run": true,
   "src": {
     "tagName": "v${version}"
   },
