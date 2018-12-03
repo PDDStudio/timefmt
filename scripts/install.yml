@@ -1,0 +1,24 @@
+# YAML file which is processed by bashful (https://github.com/wagoodman/bashful)
+# Installs dependencies, ensures a clean workspace for running the builds
+# and creates ready-to-release archives for static executables.
+
+config:
+  show-task-output: false
+  show-task-times: false
+
+tasks:
+  - name: Installing package dependencies
+    cmd: yarn
+    tags: build
+
+  - name: Make sure building on a clean workspace
+    cmd: yarn clean
+    tags: build
+  
+  - name: Create static timefmt executables
+    cmd: yarn package
+    tags: build
+
+  - name: Create archives for static executables
+    cmd: yarn archive:dist
+    tags: build
