@@ -34,7 +34,8 @@
     ]
   },
   "scripts": {
-    "build": "./scripts/build-executables.js",
+    "archive:dist": "node ./scripts/create-archive.js",
+    "build": "./scripts/task-list.js",
     "clean": "rimraf dist",
     "lint": "eslint lib/* bin/*",
     "package": "pkg . --out-path dist",
@@ -60,11 +61,13 @@
     "expect.js": "^0.3.1",
     "husky": "^1.1.2",
     "lint-staged": "^7.3.0",
+    "listr": "^0.14.3",
     "mocha": "^5.2.0",
     "pkg": "^4.3.5",
     "prettier": "^1.15.3",
     "release-it": "^8.2.0",
     "rimraf": "^2.6.2",
+    "rxjs": "^6.3.3",
     "shelljs": "^0.8.3"
   }
 }
