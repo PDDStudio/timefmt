@@ -1,6 +1,9 @@
 #!/usr/bin/env node
 
 /* eslint-disable */
+if (!process.env.NODE_ENV) {
+  process.env.NODE_ENV = "production"
+}
 
 // import library module
 const lib = require('../lib');
