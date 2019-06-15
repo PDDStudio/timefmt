@@ -1,35 +1,54 @@
 #!/usr/bin/env node
 
-const argv = require ('yargs')
-                .usage('Usage: $0 --ms [time] [...time]')
-                .example('$0 --ms 1m 30s', 'Format 1min 30secs into milliseconds')
-                .options({
-                  ms: {
-                    alias: 'milliseconds',
-                    description: 'Time to convert to ms',
-                    required: true,
-                    requiresArg: true,
-                    array: true,
-                  }
-                })
-                .boolean('d')
-                .alias('d', 'debug')
-                .default('d', false)
-                .help('h')
-                .alias('h', 'help')
-                .version('v')
-                .alias('v', 'version')
-                .argv;
+/* eslint-disable */
 
-const cvt = require('../');
-const msg = require('../lib/print-message');
+// import library module
+const lib = require('../lib');
+const { TimeUnits } = lib;
 
-msg.enableDebug(argv.d || argv.debug);
+// import and setup external requirements
+const yargs = require('yargs')
+              .scriptName('timefmt')
+              .usage('Usage: $0 [time] --output <unit>')
+              .example('$0 1min 30s --output ms', 'Converts 1min 30secs into milliseconds')
+              .option('output', {
+                alias: ['o', 'out', 'to'],
+                describe: 'Set the output unit used for input conversion',
+                choices: TimeUnits.getAvailableAliases(),
+              })
+              .option('debug', {
+                alias: 'd',
+                default: false,
+                required: false,
+              })
+              .help()
+              .alias('h', 'help')
+              .alias('v', 'version')
+              .showHelpOnFail(true)
+              .version();
 
-msg.printDebug(JSON.stringify(argv));
-const val = argv.ms.concat(argv._);
-if(val) {
-    cvt(val);
+// prepare parsed arguments
+const { argv } = yargs;
+
+// configure conversion options
+const conversionOptions = {
+  debug: (argv.d || argv.debug),
+  targetUnit: TimeUnits.resolveTimeUnit(argv.output),
+};
+
+function convertInput(input, opts) {
+  const result = lib.convertTime(input, opts);
+  if (result) {
+    lib.printOutput(input, result);
+  }
+}
+
+// TODO: better input validation in case of invalid/missing options/args (?)
+const input = argv._.join(' ').toLowerCase().trim();
+
+// input should contain at least 1 digit and one character for the target unit
+if (input.length >= 2) {
+  convertInput(input, conversionOptions);
 } else {
-    msg.reportError('Missing args: <ms>');
+  yargs.showHelp();
 }
