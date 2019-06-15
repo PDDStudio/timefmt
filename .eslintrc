@@ -1,11 +1,31 @@
 {
-    "extends": "eslint:recommended",
-    "env": {
-      "node": true,
-      "es6": true
-    },
-    "rules": {
-      "no-console": 0,
-      "quotes": [ "error", "single" ]
+  "extends": [
+    "eslint:recommended",
+    "airbnb-base"
+  ],
+  "env": {
+    "node": true,
+    "es6": true,
+    "mocha": true
+  },
+  "rules": {
+    "no-console": 0,
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "operator-linebreak": "off",
+    "consistent-return": "off",
+    "max-len": "off",
+    "padded-blocks": "off",
+    "no-plusplus": "off",
+    "radix": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": [ "lib" ]
+      }
     }
+  }
 }
