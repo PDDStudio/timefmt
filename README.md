@@ -35,8 +35,14 @@ _See `timefmt --help` for usage instructions._
 Convert `1m 30s` to `ms`:
 
 ```sh
-timefmt --ms 1m 30s
+timefmt 1m 30s --output ms
 # => The given input time 1m 30s equals: 90000 ms
+```
+
+### :information_source: Usage Information
+
+```
+Run timefmt --help for a list of all available commands, conversion outputs and more.
 ```
 
 ## :star: License
