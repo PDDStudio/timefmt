@@ -1,0 +1,14 @@
+sudo: false
+language: node_js
+node_js:
+  - "12"
+branches:
+  only:
+    - /.*/
+cache: yarn
+before_script:
+  - yarn
+script:
+  - yarn lint
+  - yarn test
+  - yarn release:ci
