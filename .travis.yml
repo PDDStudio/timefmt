@@ -1,6 +1,7 @@
 sudo: false
 language: node_js
 cache:
+  yarn: true
   directories:
     - node_modules
 branches:
@@ -11,6 +12,18 @@ stages:
   - test
   - deploy
 install: yarn
+script:
+  - yarn lint
+  - yarn test
+before_deploy:
+  - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: yarn release:ci -- minor --preRelease=next
+  on:
+    branch: /.*/
+
 jobs:
   include:
     - stage: lint
@@ -20,22 +33,7 @@ jobs:
       name: Test Project Sources
       script: yarn test
     - stage: deploy
-      name: Deploy new stable version to npm registry
-      before_script:
-        - git config --global user.name $GIT_NAME
-        - git config --global user.email $GIT_EMAIL
-      script:
-        - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
-        - yarn release:ci -- major
-      on:
-        branch: master
-    -
       name: Deploy new pre-release version to npm registry
-      before_script:
-        - git config --global user.name $GIT_NAME
-        - git config --global user.email $GIT_EMAIL
       script:
-        - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
         - yarn release:ci -- minor --preRelease=next
-      on:
-        branch: develop
+
