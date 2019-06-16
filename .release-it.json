@@ -14,15 +14,5 @@
   },
   "npm": {
     "publish": true
-  },
-  "dist": {
-    "github": {
-      "release": true,
-      "tokenRef": "RELEASE_IT_GH_TOKEN",
-      "assets": [ "./*" ]
-    },
-    "npm": {
-      "publish": false
-    }
   }
 }

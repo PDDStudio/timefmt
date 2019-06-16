@@ -8,11 +8,8 @@ install: yarn
 script:
   - yarn lint
   - yarn test
-# before_deploy:
-#   - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
 deploy:
   provider: script
-  # skip_cleanup: true
   before_deploy:
     - git remote rm origin
     - git remote add origin https://${GIT_USER}:${RELEASE_IT_GH_TOKEN}@github.com/${GIT_USER}/${PROJECT_NAME}.git
