@@ -4,36 +4,17 @@ cache:
   yarn: true
   directories:
     - node_modules
-branches:
-  only:
-    - /.*/
-stages:
-  - lint
-  - test
-  - deploy
 install: yarn
 script:
   - yarn lint
   - yarn test
-before_deploy:
-  - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
 deploy:
   provider: script
-  skip_cleanup: true
-  script: yarn release:ci -- minor --preRelease=next
+  before_deploy:
+    - git remote rm origin
+    - git remote add origin https://${GIT_USER}:${RELEASE_IT_GH_TOKEN}@github.com/${GIT_USER}/${PROJECT_NAME}.git
+    - git symbolic-ref HEAD refs/heads/master
+    - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+  script: yarn travis:publish:npm -- minor --preRelease=next
   on:
-    branch: /.*/
-
-jobs:
-  include:
-    - stage: lint
-      name: Lint Project Sources
-      script: yarn lint
-    - stage: test
-      name: Test Project Sources
-      script: yarn test
-    - stage: deploy
-      name: Deploy new pre-release version to npm registry
-      script:
-        - yarn release:ci -- minor --preRelease=next
-
+    branch: develop
