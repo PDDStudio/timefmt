@@ -46,7 +46,8 @@
     "package": "cross-env NODE_ENV=production pkg . --out-path dist",
     "precommit": "lint-staged",
     "release": "source .env && release-it",
-    "release:ci": "yarn archive && release-it",
+    "prerelease:ci": "yarn archive",
+    "release:ci": "release-it",
     "test": "cross-env NODE_ENV=development mocha tests"
   },
   "husky": {
