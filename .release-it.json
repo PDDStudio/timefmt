@@ -1,5 +1,9 @@
 {
   "non-interactive": true,
+  "git": {
+    "requireUpstream": false,
+    "requireCleanWorkingDir": false
+  },
   "src": {
     "tagName": "v${version}"
   },

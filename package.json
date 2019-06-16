@@ -15,6 +15,9 @@
   "bugs": {
     "url": "https://github.com/pddstudio/timefmt/issues"
   },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },  
   "keywords": [
     "time",
     "conversion",
@@ -28,22 +31,28 @@
   },
   "pkg": {
     "targets": [
-      "node10-win-x64",
-      "node10-linux-x64",
-      "node10-macos-x64"
+      "node12-win-x64",
+      "node12-linux-x64",
+      "node12-macos-x64"
     ]
   },
   "scripts": {
     "archive": "yarn package && yarn archive:dist",
-    "clean": "rimraf dist",
     "archive:dist": "cross-env NODE_ENV=production node ./scripts/create-archive.js",
+    "clean": "rimraf dist",
     "debug": "cross-env NODE_ENV=development bin/timefmt.js",
     "lint": "eslint lib/* bin/*",
     "prepackage": "yarn clean",
     "package": "cross-env NODE_ENV=production pkg . --out-path dist",
     "precommit": "lint-staged",
     "release": "source .env && release-it",
-    "test": "cross-env NODE_ENV=development mocha tests"
+    "prerelease-it": "yarn archive",
+    "release-it": "release-it",
+    "test": "cross-env NODE_ENV=development mocha tests",
+    "travis:mkbin": "yarn package",
+    "travis:pkgbin": "yarn archive:dist",
+    "travis:publish:npm": "release-it --no-git",
+    "travis:publish:github": ""
   },
   "husky": {
     "hooks": {
@@ -53,7 +62,7 @@
   },
   "lint-staged": {
     "*.js": [
-      "npm run lint",
+      "yarn lint",
       "prettier --single-quote --write",
       "git add"
     ]
@@ -74,9 +83,9 @@
     "lint-staged": "^7.3.0",
     "listr": "^0.14.3",
     "mocha": "^5.2.0",
-    "pkg": "^4.3.5",
+    "pkg": "^4.4.0",
     "prettier": "^1.15.3",
-    "release-it": "^8.2.0",
+    "release-it": "^12.3.0",
     "rimraf": "^2.6.2",
     "rxjs": "^6.3.3",
     "shelljs": "^0.8.3"
