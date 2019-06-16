@@ -17,3 +17,7 @@ bin/
 release.config.json
 .lintstagedrc
 .huskyrc
+.eslintrc
+.release-it.json
+.semaphore/
+scripts/
