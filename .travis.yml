@@ -21,15 +21,15 @@ jobs:
       script: yarn test
     - stage: release
       name: Release Stable Version
-      script: yarn release:ci -- minor
-      deploy:
-        provider: npm
-        api_key: $NPM_TOKEN
-        email: $NPM_EMAIL
-        on:
-          branch: master
+      script:
+        - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+        - yarn release:ci -- major
+      on:
+        branch: master
     -
       name: Release Pre-release Version
-      script: yarn release:ci -- --preRelease=next
+      script:
+        - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
+        - yarn release:ci -- minor --preRelease=next
       on:
         branch: develop
