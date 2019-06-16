@@ -1,14 +1,33 @@
 sudo: false
 language: node_js
-node_js:
-  - "12"
-branches:
-  only:
-    - /.*/
 cache: yarn
-before_script:
-  - yarn
-script:
-  - yarn lint
-  - yarn test
-  - yarn release:ci -- minor --ci
+stages:
+  - lint
+  - test
+  - deploy
+jobs:
+  include:
+    - stage: lint
+      name: Lint Project Sources
+      script: yarn lint
+      branches:
+        only:
+          - /.*/
+    - stage: test
+      name: Test Project Sources
+      script: yarn test
+      branches:
+        only:
+          - /.*/
+    - stage: deploy
+      name: Publish Stable Version
+      script: yarn release:ci
+      branches:
+        only:
+          - master
+    -
+      name: Publish Pre-release
+      script: yarn release:ci -- --preRelease=next
+      branches:
+        only:
+          - develop
