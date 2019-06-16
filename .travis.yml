@@ -9,7 +9,7 @@ branches:
 stages:
   - lint
   - test
-  - release
+  - deploy
 install: yarn
 jobs:
   include:
@@ -19,15 +19,15 @@ jobs:
     - stage: test
       name: Test Project Sources
       script: yarn test
-    - stage: release
-      name: Release Stable Version
+    - stage: deploy
+      name: Deploy new stable version to npm registry
       script:
         - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
         - yarn release:ci -- major
       on:
         branch: master
     -
-      name: Release Pre-release Version
+      name: Deploy new pre-release version to npm registry
       script:
         - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
         - yarn release:ci -- minor --preRelease=next
