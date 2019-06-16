@@ -30,7 +30,6 @@ jobs:
           branch: master
     -
       name: Release Pre-release Version
-      before_script: npm login $NPM_USER
       script: yarn release:ci -- --preRelease=next
       on:
         branch: develop
