@@ -1,14 +1,36 @@
 sudo: false
 language: node_js
-node_js:
-  - "12"
+cache:
+  directories:
+    - node_modules
 branches:
   only:
     - /.*/
-cache: yarn
-before_script:
-  - yarn
-script:
-  - yarn lint
-  - yarn test
-  - yarn release:ci -- minor --ci
+stages:
+  - lint
+  - test
+  - release
+install: yarn
+jobs:
+  include:
+    - stage: lint
+      name: Lint Project Sources
+      script: yarn lint
+    - stage: test
+      name: Test Project Sources
+      script: yarn test
+    - stage: release
+      name: Release Stable Version
+      script: yarn release:ci -- minor
+      deploy:
+        provider: npm
+        api_key: $NPM_TOKEN
+        email: $NPM_EMAIL
+        on:
+          branch: master
+    -
+      name: Release Pre-release Version
+      before_script: npm login $NPM_USER
+      script: yarn release:ci -- --preRelease=next
+      on:
+        branch: develop
