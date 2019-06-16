@@ -21,6 +21,9 @@ jobs:
       script: yarn test
     - stage: deploy
       name: Deploy new stable version to npm registry
+      before_script:
+        - git config --global user.name $GIT_NAME
+        - git config --global user.email $GIT_EMAIL
       script:
         - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
         - yarn release:ci -- major
@@ -28,6 +31,9 @@ jobs:
         branch: master
     -
       name: Deploy new pre-release version to npm registry
+      before_script:
+        - git config --global user.name $GIT_NAME
+        - git config --global user.email $GIT_EMAIL
       script:
         - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > .npmrc
         - yarn release:ci -- minor --preRelease=next
