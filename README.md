@@ -2,6 +2,8 @@
 
 > A tiny time converting util for the command line.
 
+[![Build Status](https://travis-ci.com/PDDStudio/timefmt.svg?branch=develop)](https://travis-ci.com/PDDStudio/timefmt)
+
 ## :package: Installation
 
 You can choose one of the following ways to install `timefmt`
